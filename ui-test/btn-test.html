@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    @media (max-width: 375px) {
+        .modal {
+            width: 15rem !important;
+        }
+    }
+
+    .btn {
+        border: 0;
+        background: #93ca00;
+        padding: 10px 20px;
+        font-size: 20px;
+        color: #333;
+        text-decoration: none;
+        margin: 20px;
+        display: inline-block;
+        border-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .openo2 {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+
+    .openo1 {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+</style>
+
+<body>
+    <button class="btn" onclick="openModel()">Please select</button>
+
+    <div id="card" style="background: rgba(212, 211, 211, 0.8);
+    width: 100%;position: fixed;top: 0;left: 0;bottom: 0;right: 0;
+    opacity: 0;pointer-events: none;transition: all 300ms;overflow: auto;">
+        <div id="modal" style="width: 20rem;height: 20rem;
+        background: #fff;border-radius: 1.5rem;margin: 10rem auto;
+        transform: scale(0);opacity: 0;transition: all 300ms;
+        box-shadow: 0 4px 8px 0 rgba(100, 100, 100, 0.2), 0 6px 20px 0 rgba(92, 92, 92, 0.19);">
+            <a href="#" onclick="closeModel()" style="color: #000000;
+            position: fixed;top: 10px;right: 15px;text-decoration: none;">X</a>
+            <div style="padding: 40px 30px 20px;
+            line-height: 1.6;
+            font-size: 16px;">
+                Finish!
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const card = document.getElementById("card");
+    const model = document.getElementById("modal");
+
+    function openModel() {
+        card.className = "openo1";
+        model.className = "modal openo2";
+    }
+
+    function closeModel() {
+        card.className = "";
+        model.className = "modal";
+    }
+</script>
+
+</html>

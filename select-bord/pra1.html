@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="./normalize.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>新春活動</title>
+</head>
+
+<body class="container" style="max-width:700px;min-width:280px;color: rgb(19, 18, 117);font-size: 150%;">
+    <div class="bg-main">
+        <div class="session1">
+            <h1 class="color-red-style" style="margin-bottom: .2em;font-weight: 600;font-size: 350%;">
+                新春好運到
+            </h1>
+            <ul style="padding-left: 0;
+            margin: 0 auto;list-style: none;
+            display: table;font-weight: bolder;
+            font-size: 130%;">
+                <li>第一波 2022.1.18~2.14</li>
+                <li>第二波 2022.2.15~3.14</li>
+            </ul>
+        </div>
+
+        <div class="session2">
+            <h3 style="margin: 0;font-size: 130%;">
+                每日登入選號, 最高獨享300萬紅利
+            </h3>
+            <p style="margin: .5em 0 0 0;font-size: 115%;">
+                完成樂透選號還可以獲得開運刮刮卡乙張
+            </p>
+        </div>
+
+        <div class="session2-1">
+            <div class="selected-bord">
+                <h3 style="margin: 0;padding:0.5em 0em 0.5em 0em;font-size: 180%;">本期選號</h3>
+                <div>
+                    <div id="c1" class="circle"></div>
+                    <div id="c2" class="circle"></div>
+                    <div id="c3" class="circle"></div>
+                    <div id="c4" class="circle"></div>
+                    <div id="c5" class="circle"></div>
+                    <div id="c6" class="circle"></div>
+                </div>
+                <p style="margin: 0;padding-top: 2em;font-size: 120%;">選擇一個號碼</p>
+                <div id="selectBord" style="padding-top: 1em;">
+                    <div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s1">1</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s2">2</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s3">3</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s4">4</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s5">5</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s6">6</div>
+                    </div>
+                    <div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s7">7</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s8">8</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s9">9</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s10">10</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s11">11</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s12">12</div>
+                    </div>
+                    <div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s13">13</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s14">14</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s15">15</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s16">16</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s17">17</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s18">18</div>
+                    </div>
+                    <div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s19">19</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s20">20</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s21">21</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s22">22</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s23">23</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s24">24</div>
+                    </div>
+                    <div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s25">25</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s26">26</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s27">27</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s28">28</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s29">29</div>
+                        <div class="selected-button" onclick="selectedBtn(this)" id="s30">30</div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 1em;">
+                    <button class="btn-confirm" onclick="confirmNumber()">確認號碼</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="session3">
+            <div class="i-want-join">
+                我要參加
+            </div>
+        </div> -->
+
+        <div class="session4">
+            <h4 style="margin: 0;font-size: 100%;">活動說明：</h4>
+            <ul style="padding-left: 0;margin: 0 auto;padding: .5em 1.5em 0 1.5em;font-size: 80%;line-height: 1.6em;">
+                <li>每日登入後可選擇一個號碼, 號碼選擇後無法更換, 活動期間最多選擇6個號碼</li>
+                <li>完成選取6號碼可獲得開運刮刮卡乙張</li>
+                <li>活動結束次日電腦隨機抽選六個號碼, 中3個號碼(含)以上者, 可依比例均分紅利點數300萬點</li>
+            </ul>
+        </div>
+        <div class="session5">
+            <h4 style="margin: 0;font-size: 100%;">中獎紅利點數分配說明：</h4>
+            <div align="center" style="width: 100%;">
+                <table
+                    style="text-align: center;border-collapse: separate;border-spacing: 0;width: 100%;padding: .5rem;margin: 0.5em 0em 0.5em 0rem;font-size: 80%;">
+                    <tr>
+                        <td class="bt bl tl-radius" style="text-align: left;">對中號碼數</td>
+                        <td class="bt">0~2個</td>
+                        <td class="bt">3個</td>
+                        <td class="bt">4個</td>
+                        <td class="bt">5個</td>
+                        <td class="bt br tr-radius">6個</td>
+                    </tr>
+                    <tr>
+                        <td class="bt bb bl bl-radius" style="text-align: left;"> 領獎單位</td>
+                        <td class="bt bb color-red-style">0</td>
+                        <td class="bt bb color-red-style">1</td>
+                        <td class="bt bb color-red-style">5</td>
+                        <td class="bt bb color-red-style">25</td>
+                        <td class="bt bb br br-radius color-red-style">100</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="session6">
+            <p style="margin: 0 0 0 -.5em ;font-size: 80%;">【舉例】</p>
+            <p style="margin: 0;font-size: 90%;line-height: 1.6em;font-size: 80%;">中3個號碼共1,000人, 中4個號碼共800人, 中5個號碼共500人,
+                中6個號碼共200人,
+                總領獎單位共37,500,
+                每單位可獲得紅利點數80點</p>
+            <p style="margin: 0;color: rgb(218, 63, 63);font-size: 80%;"> >> 中6個號碼的人每人可獲得8,000點</p>
+        </div>
+    </div>
+</body>
+<script>
+
+    var temp_selected = null;
+    function selectedBtn(e) {
+        let mySelected = document.getElementById(e.id);
+        let myAns = document.getElementById("c1")// Today change
+        myAns.innerHTML = mySelected.innerHTML;
+        if (temp_selected) {
+            temp_selected.className = "selected-button";
+        }
+        mySelected.className += " bg-color-gary-style";
+        temp_selected = mySelected;
+    }
+
+    function confirmNumber() {
+        
+    }
+</script>
+
+</html>
