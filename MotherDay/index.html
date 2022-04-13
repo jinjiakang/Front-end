@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" />
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <title>EsunCreditweb</title>
+</head>
+<style>
+    body {
+        font-family: 微軟正黑體;
+        touch-action: pan-y;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+    .watermark {
+        color: #ff0000;
+        position: absolute;
+        margin: 0;
+        z-index: 10;
+        left: 55%;
+        top: 25%;
+    }
+
+    .prizeMark {
+        font-weight: 800;
+        font-size: small;
+        border: 1.5px solid rgb(255, 0, 0);
+        padding: 1px 10px;
+        border-radius: 5px;
+        -webkit-transform: rotate(15deg);
+        -moz-transform: rotate(15deg);
+    }
+
+    /**
+    * Circle Styles
+    */
+    .circle100 {
+        position: relative;
+        display: block;
+        background-color: transparent;
+        text-align: center;
+        color: rgb(184, 184, 184);
+        width: 3rem;
+    }
+
+    .circle100:after {
+        display: block;
+        padding-bottom: 100%;
+        width: 100%;
+        height: 0;
+        border-radius: 50%;
+        border: 0.1rem rgb(184, 184, 184) solid;
+        content: "";
+
+    }
+
+    .circle1000 {
+        position: relative;
+        display: block;
+        background-color: transparent;
+        text-align: center;
+        color: rgb(255, 230, 3);
+        width: 3rem;
+    }
+
+    .circle1000:after {
+        display: block;
+        padding-bottom: 100%;
+        width: 100%;
+        height: 0;
+        border-radius: 50%;
+        border: 0.1rem rgb(255, 230, 3) solid;
+        content: "";
+    }
+
+    .circle100000 {
+        position: relative;
+        display: block;
+        background-color: transparent;
+        text-align: center;
+        color: rgb(255, 157, 28);
+        width: 3rem;
+    }
+
+    .circle100000:after {
+        display: block;
+        padding-bottom: 100%;
+        width: 100%;
+        height: 0;
+        border-radius: 50%;
+        border: 0.1rem rgb(255, 157, 28) solid;
+        content: "";
+
+    }
+
+    .circle__inner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .circle__wrapper {
+        display: table;
+        width: 100%;
+        height: 100%;
+    }
+
+    .circle__content {
+        font-size: .5rem;
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+<body>
+    <script src="./js/lottie.min.js"></script>
+    <script src="./json/main.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/vue-3.js"></script>
+    <div id="app" class="container" style="max-width: 588px;;min-width: 344px;">
+        <div class="row mt-4">
+            <div class="col-12">
+                <p class="fs-5 fw-bold">活動內容：</p>
+                <p>2022/4/29-5/15單筆消費滿1,000即可參與刷卡對對碰活動, 授權碼對中指定號碼即可獲得紅利點數！</p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <!-- <img src="./img/main.jpg" class="img-fluid"> -->
+            <div id="lottie" class="img-fluid"></div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <button class="btn btn-outline-primary rounded-pill" style="width:90%;padding-bottom: 5px;
+                padding-top: 5px;" :onclick="actDetail">活動詳情</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-9" style="padding-right: 0px !important;">
+                <div class="">
+                    <span class="fs-6 fw-bold">交易紀錄： </span>
+                    <span class="fs-6 fw-bold">{{viewCardName(cardsIndex)}}</span>
+                </div>
+            </div>
+            <div class="col-3 align-middle" style="padding-left: 0px !important;">
+                <div class="text-end">
+                    <button v-if="cards.length != 0" type="button" class="btn btn-primary btn-sm fw-bold rounded-pill"
+                        style=" padding-bottom: 0px; padding-top: 0px;" @click="changeCard">切換卡片</button>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="card shadow p-2 bg-body rounded m-2" v-for="(trans, index) in viewTransDetail(cardsIndex)">
+                    <div class="row g-0" :style="cardsStyle" @click="confirmPrize(index)">
+                        <div class="col-2">
+                            <div :class="classCircle(trans.pic)">
+                                <div class="circle__inner">
+                                    <div class="circle__wrapper">
+                                        <div class="circle__content" v-if="trans.pic == 100">感恩禮</div>
+                                        <div class="circle__content" v-if="trans.pic == 1000">幸運禮</div>
+                                        <div class="circle__content" v-if="trans.pic == 100000">超級<br>幸運禮</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <span class="fs-6 fw-bold">{{trans.MName}}</span>
+                            <p class="card-text"><small class="text-muted">{{trans.TransDateTime}}</small>
+                                <span v-show="trans.isGetPrize=='Y'" class="watermark prizeMark shadow">已領取</span>
+                            </p>
+                        </div>
+                        <div class="col-4 text-end">
+                            <small class="text-muted">$ {{trans.Amount}}</small>
+                            <p class="card-text text-primary">{{trans.AIR}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-5">
+            <div class="col-12 text-center">
+                <small class="text-muted">{{viewBottomWord(cardsIndex)}}</small>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="actDetail">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        活動內容
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="changeCard">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="card-header">
+                        請選擇卡片
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" v-for="(card , index) in cards" :id=card.cardId
+                                :style="cardsStyle" @click="onclickCard(index)">
+                                {{card.cardName}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmPrize">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        請確認是否兌換?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-sm  btn-primary"
+                            @click="onclickPrize(confirmPrizeIndex)">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="position-fixed top-0 end-0 pt-5" style="z-index: 11">
+            <div id="toastAlert" class="toast align-items-center text-white bg-danger border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{toastAlertText}}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                actDetailModel: null,
+                changeCardModel: null,
+                confirmPrizeModal: null,
+                toastAlert: null,
+                toastAlertText: '',
+                confirmPrizeIndex: 0,
+                cardsIndex: 0,
+                cardsStyle: {
+                    cursor: 'pointer',
+                },
+                cards: [],
+                transDetail: {},
+            }
+        }, methods: {
+            popAlert(rc) {
+                this.toastAlertText = '請稍後再試(99)'
+                if (rc == 98) {
+                    this.toastAlertText = '取得交易紀錄異常(98)'
+                } else if (rc == 97) {
+                    this.toastAlertText = '兌換時發生異常(97)'
+                } else if (rc == 96) {
+                    this.toastAlertText = '該筆點數已領取(96)'
+                } else if (rc == 95) {
+                    this.toastAlertText = '關帳中，請明天再來領取點數!(95)'
+                } else if (rc == 94) {
+                    this.toastAlertText = '兌換時發生異常(94)'
+                } else if (rc == 93) {
+                    this.toastAlertText = '已達活動領取上限(93)'
+                }
+                this.toastAlert.show()
+            },
+            actDetail() {
+                this.actDetailModel.show()
+            },
+            changeCard() {
+                this.changeCardModal.show()
+            },
+            onclickCard(i) {// 點選卡片決定交易明細
+                let cardId = this.cards[i].cardId;
+                if (!Object.keys(this.transDetail).includes(cardId)) { // 若查無再去要資料
+                    this.getTransDetail(cardId).then(res => res.json())
+                        .then((response) => {
+                            // console.log(response)
+                            if (response['RC'] == '00') {
+                                this.transDetail[cardId] = response['transDetail'][cardId]
+                            } else {
+                                this.popAlert(response['RC'])
+                            }
+                        }).catch((error) => {
+                            this.popAlert(99)
+                            console.log('錯誤' + error);
+                        })
+                }
+                this.changeCardModal.hide()
+                this.cardsIndex = i
+            },
+            confirmPrize(i) {// 確認是否兌換
+                let cardId = this.cards[this.cardsIndex].cardId;
+                let transDetail = this.transDetail[cardId][i]
+                if (transDetail.isGetPrize == 'Y') {
+                    return
+                }
+                this.confirmPrizeModal.show()
+                this.confirmPrizeIndex = i;
+            },
+            onclickPrize(i) {// 點選兌換
+                let cardId = this.cards[this.cardsIndex].cardId;
+                let transDetail = this.transDetail[cardId][i]
+                if (transDetail.isGetPrize == 'Y') {
+                    return
+                }
+                this.getPrize(cardId, transDetail.AIR)
+                    .then(res => res.json())
+                    .then((response) => {
+                        // console.log(response)
+                        if (response['RC'] == '00') {
+                            transDetail.isGetPrize = 'Y'
+                        } else {
+                            this.popAlert(response['RC'])
+                        }
+                    }).catch((error) => {
+                        this.popAlert(99)
+                        console.log('錯誤' + error);
+                    }).finally(() => {
+                        this.confirmPrizeModal.hide()
+                    })
+            },
+            async getPrize(cardId, air) {
+                const response = await fetch('https://cardtest.esunbank.com.tw/EsunCreditweb/txnservice/esunwallet/motherDay', {
+                    method: 'post',
+                    body: 'action=getPrize&uid=99039980200&cardId=' + cardId + '&air=' + air,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                return await response
+            },
+            async getCards() {
+                const response = await fetch('http://localhost:3000/getCards', {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                return await response
+            },
+            async getTransDetail(cardId) {
+                const response = await fetch('http://localhost:3000/getTransDetail', {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                return await response
+            },
+            viewCardName(cardsIndex) {
+                if (this.cards.length == 0) {
+                    return '未持有符合活動之卡片'
+                } else {
+                    return this.cards[cardsIndex].cardName
+                }
+            },
+            viewTransDetail(cardsIndex) {
+                if (this.cards.length == 0 || JSON.stringify(this.transDetail) === '{}') {
+                    return JSON.parse('[]')
+                } else {
+                    return this.transDetail[this.cards[cardsIndex].cardId]
+                }
+            },
+            viewBottomWord(cardsIndex) {
+                if (JSON.stringify(this.transDetail) === '{}' || JSON.stringify(this.transDetail[this.cards[cardsIndex].cardId]) === '[]') {
+                    return '--無符合活動之交易紀錄--'
+                } else {
+                    return '--無更多交易紀錄--'
+                }
+            },
+            classCircle(pic) {
+                if (pic == 100) {
+                    return 'circle100';
+                }
+                if (pic == 1000) {
+                    return 'circle1000';
+                }
+                if (pic == 100000) {
+                    return 'circle100000';
+                }
+            },
+        }, mounted() {
+            this.actDetailModel = new bootstrap.Modal(document.getElementById('actDetail'), {
+                keyboard: false
+            })
+            this.changeCardModal = new bootstrap.Modal(document.getElementById('changeCard'), {
+                keyboard: false
+            })
+            this.confirmPrizeModal = new bootstrap.Modal(document.getElementById('confirmPrize'), {
+                keyboard: false
+            })
+            this.toastAlert = new bootstrap.Toast(document.getElementById('toastAlert'))
+            this.getCards()
+                .then(res => res.json())
+                .then((response) => {
+                    if (response['RC'] == '00') {
+                        this.cards = response['cards']
+                        this.getTransDetail(this.cards[0].cardId)
+                            .then(res => res.json())
+                            .then((response) => {
+                                if (response['RC'] == '00') {
+                                    this.transDetail = response['transDetail']
+                                } else {
+                                    this.popAlert(response['RC'])
+                                }
+                            }).catch((error) => {
+                                this.popAlert(response['RC'])
+                                console.log('錯誤' + error);
+                            })
+                    } else {
+                        this.popAlert(response['RC'])
+                    }
+                }).catch((error) => {
+                    this.popAlert(99)
+                    console.log('錯誤' + error);
+                })
+        }
+    }).mount('#app')
+
+    var anim = lottie.loadAnimation({
+        container: document.getElementById('lottie'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        animationData: animationData,
+    });
+</script>
