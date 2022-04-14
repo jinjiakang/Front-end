@@ -72,7 +72,6 @@
 </style>
 
 <body>
-    <script src="./json/main.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/vue-3.js"></script>
     <div id="app" class="container-fluid p-0" style="max-width: 588px;min-width: 344px;">
@@ -100,12 +99,12 @@
                     <div class="d-flex flex-fill" style="font-size: medium;">
                         <div class=" d-flex flex-fill justify-content-center align-items-center"
                             style="background-color: #ff80ac;color: #ffffff; width: 100%;height: 100%;border-radius: 30px;">
-                            <span style="font-size: 1.2rem;">102,000 點</span>
+                            <span style="font-size: 1.2rem;">{{ formatPonintTotal }} 點</span>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end align-items-center m-2">
                         <span style="font-size: .1rem;">
-                            共 3 筆
+                            共 {{ myPrize.prizeCount }} 筆
                         </span>
                     </div>
                 </div>
@@ -237,7 +236,16 @@
                 },
                 cards: [],
                 transDetail: {},
+                myPrize: {
+                    pointTotal: 0,
+                    prizeCount: 0,
+                },
             }
+        }, computed:{
+            formatPonintTotal() {
+                let comma = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g
+                return this.myPrize.pointTotal.toString().replace(comma, ',')
+            },
         }, methods: {
             popAlert(rc) {
                 this.toastAlertText = '請稍後再試(99)'
@@ -302,6 +310,8 @@
                         // console.log(response)
                         if (response['RC'] == '00') {
                             transDetail.isGetPrize = 'Y'
+                            this.myPrize.pointTotal += transDetail.pic
+                            this.myPrize.prizeCount += 1
                         } else {
                             this.popAlert(response['RC'])
                         }
@@ -340,6 +350,15 @@
                 })
                 return await response
             },
+            async getMyPrize() {
+                const response = await fetch('http://localhost:3000/getMyPrize', {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                })
+                return await response
+            },
             viewCardName(cardsIndex) {
                 if (this.cards.length == 0) {
                     return '未持有符合活動之卡片'
@@ -361,17 +380,6 @@
                     return '--無更多交易紀錄--'
                 }
             },
-            classCircle(pic) {
-                if (pic == 100) {
-                    return 'circle100';
-                }
-                if (pic == 1000) {
-                    return 'circle1000';
-                }
-                if (pic == 100000) {
-                    return 'circle100000';
-                }
-            },
         }, mounted() {
             this.actDetailModel = new bootstrap.Modal(document.getElementById('actDetail'), {
                 keyboard: false
@@ -383,6 +391,22 @@
                 keyboard: false
             })
             this.toastAlert = new bootstrap.Toast(document.getElementById('toastAlert'))
+
+            this.getMyPrize()
+                .then(res => res.json())
+                .then((response) => {
+                    if (response['RC'] != '00') {
+                        this.popAlert(response['RC'])
+                        return
+                    }
+                    this.myPrize.pointTotal = response['data']['pointTotal']
+                    this.myPrize.prizeCount = response['data']['prizeCount']
+                }).catch((error) => {
+                    this.popAlert(99)
+                    console.log('錯誤' + error);
+                })
+
+
             this.getCards()
                 .then(res => res.json())
                 .then((response) => {
