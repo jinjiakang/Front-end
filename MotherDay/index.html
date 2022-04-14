@@ -19,7 +19,7 @@
     }
 
     .watermark {
-        color: #ff0000;
+        color: #ffffff;
         position: absolute;
         margin: 0;
         z-index: 10;
@@ -28,170 +28,138 @@
     }
 
     .prizeMark {
-        font-weight: 800;
         font-size: small;
-        border: 1.5px solid rgb(255, 0, 0);
-        padding: 1px 10px;
-        border-radius: 5px;
-        -webkit-transform: rotate(15deg);
-        -moz-transform: rotate(15deg);
+        border: 1.5px solid #ef4343;
+        background-color: #ef4343;
+        padding: 1px 5px;
+        border-radius: 20px;
+        -webkit-transform: rotate(25deg);
+        -moz-transform: rotate(25deg);
     }
 
-    /**
-    * Circle Styles
-    */
-    .circle100 {
-        position: relative;
-        display: block;
-        background-color: transparent;
+    .div1-font-size {
+        font-size: x-large;
+    }
+
+    .div1-active-Btn {
+        display: inline-block;
+        padding: .6rem 2rem;
+        border-radius: 2em;
+        box-sizing: border-box;
+        text-decoration: none;
+        color: #00a19b;
+        border-color: #00a19b;
+        background-color: #ffffff;
         text-align: center;
-        color: rgb(184, 184, 184);
-        width: 3rem;
     }
 
-    .circle100:after {
-        display: block;
-        padding-bottom: 100%;
-        width: 100%;
-        height: 0;
-        border-radius: 50%;
-        border: 0.1rem rgb(184, 184, 184) solid;
-        content: "";
-
+    @media (max-width: 510px) {
+        .div1-font-size {
+            font-size: large;
+        }
     }
 
-    .circle1000 {
-        position: relative;
-        display: block;
-        background-color: transparent;
-        text-align: center;
-        color: rgb(255, 230, 3);
-        width: 3rem;
-    }
+    @media (max-width: 410px) {
+        .div1-font-size {
+            font-size: small;
+        }
 
-    .circle1000:after {
-        display: block;
-        padding-bottom: 100%;
-        width: 100%;
-        height: 0;
-        border-radius: 50%;
-        border: 0.1rem rgb(255, 230, 3) solid;
-        content: "";
-    }
-
-    .circle100000 {
-        position: relative;
-        display: block;
-        background-color: transparent;
-        text-align: center;
-        color: rgb(255, 157, 28);
-        width: 3rem;
-    }
-
-    .circle100000:after {
-        display: block;
-        padding-bottom: 100%;
-        width: 100%;
-        height: 0;
-        border-radius: 50%;
-        border: 0.1rem rgb(255, 157, 28) solid;
-        content: "";
-
-    }
-
-    .circle__inner {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    .circle__wrapper {
-        display: table;
-        width: 100%;
-        height: 100%;
-    }
-
-    .circle__content {
-        font-size: .5rem;
-        display: table-cell;
-        vertical-align: middle;
+        .main-font {
+            font-size: .3rem !important;
+            font-weight: bold !important;
+        }
     }
 </style>
 
 <body>
-    <script src="./js/lottie.min.js"></script>
     <script src="./json/main.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/vue-3.js"></script>
-    <div id="app" class="container" style="max-width: 588px;;min-width: 344px;">
-        <div class="row mt-4">
-            <div class="col-12">
-                <p class="fs-5 fw-bold">活動內容：</p>
-                <p>2022/4/29-5/15單筆消費滿1,000即可參與刷卡對對碰活動, 授權碼對中指定號碼即可獲得紅利點數！</p>
+    <div id="app" class="container-fluid p-0" style="max-width: 588px;min-width: 344px;">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <img src="./img/mom520_kv.jpg" class="img-fluid" style="background-size: cover; display: block;">
+            <div style="position: absolute;display: flex;flex-direction: column;align-items: center;">
+                <p class="mt-3 text-center div1-font-size">
+                    2022/4/29~2022/5/15<br>單筆消費滿1,000元<br>即可參與刷卡對對碰活動<br>授權碼對中指定號碼即可獲得紅利點數</p>
+                <button class="btn div1-active-Btn div1-font-size">活動詳情</button>
             </div>
         </div>
-        <div class="row text-center">
-            <!-- <img src="./img/main.jpg" class="img-fluid"> -->
-            <div id="lottie" class="img-fluid"></div>
+        <div class="d-flex flex-column mt-4 px-5">
+            <img src="./img/mom520_point.png" class="img-fluid" style="z-index: 1;">
         </div>
-        <div class="row mt-3">
-            <div class="col-12 text-center">
-                <button class="btn btn-outline-primary rounded-pill" style="width:90%;padding-bottom: 5px;
-                padding-top: 5px;" :onclick="actDetail">活動詳情</button>
-            </div>
+        <div class="d-flex flex-column" style="height: 2rem; margin-top: -2rem;">
+            <img src="./img/mom520_wave.png" class="img-fluid" style="z-index: -1;">
         </div>
-        <div class="row mt-3">
-            <div class="col-9" style="padding-right: 0px !important;">
-                <div class="">
-                    <span class="fs-6 fw-bold">交易紀錄： </span>
-                    <span class="fs-6 fw-bold">{{viewCardName(cardsIndex)}}</span>
-                </div>
-            </div>
-            <div class="col-3 align-middle" style="padding-left: 0px !important;">
-                <div class="text-end">
-                    <button v-if="cards.length != 0" type="button" class="btn btn-primary btn-sm fw-bold rounded-pill"
-                        style=" padding-bottom: 0px; padding-top: 0px;" @click="changeCard">切換卡片</button>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-12">
-                <div class="card shadow p-2 bg-body rounded m-2" v-for="(trans, index) in viewTransDetail(cardsIndex)">
-                    <div class="row g-0" :style="cardsStyle" @click="confirmPrize(index)">
-                        <div class="col-2">
-                            <div :class="classCircle(trans.pic)">
-                                <div class="circle__inner">
-                                    <div class="circle__wrapper">
-                                        <div class="circle__content" v-if="trans.pic == 100">感恩禮</div>
-                                        <div class="circle__content" v-if="trans.pic == 1000">幸運禮</div>
-                                        <div class="circle__content" v-if="trans.pic == 100000">超級<br>幸運禮</div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="mt-3 container-fluid px-2" style="background-color: #fff5ec;">
+            <div class="card mx-2" style="background-color: #ffd1d1;border-color: #ffffff;">
+                <div class="d-flex flex-row mx-2 ">
+                    <div class="d-flex flex-column justify-content-center flex-fill m-2">
+                        <span style="font-size: 1.2rem;text-align: start;">目前已領取</span>
+                        <span style="font-size: .1rem;text-align: start;">(本活動限領取50筆)</span>
+                    </div>
+                    <div class="d-flex flex-fill" style="font-size: medium;">
+                        <div class=" d-flex flex-fill justify-content-center align-items-center"
+                            style="background-color: #ff80ac;color: #ffffff; width: 100%;height: 100%;border-radius: 30px;">
+                            <span style="font-size: 1.2rem;">102,000 點</span>
                         </div>
-                        <div class="col-6">
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center m-2">
+                        <span style="font-size: .1rem;">
+                            共 3 筆
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row mt-4 mb-2 mx-3">
+                <div class="d-flex mx-2" style="border-right: 1pt solid gray;"></div>
+                <div class="d-flex justify-content-center align-items-center" style="font-size: .1rem;">
+                    交易紀錄
+                </div>
+                <div class="d-flex mx-2" style="border-right: 1pt solid gray;"></div>
+                <div class="d-flex flex-fill fw-bold justify-content-start align-items-center main-font">
+                    {{viewCardName(cardsIndex)}}</div>
+                <div class="d-flex justify-content-end align-items-center"><button v-show="cards.length != 0"
+                        type="button" class="btn"
+                        style="padding-bottom: 0px; padding-top: 0px;background-color: #2d9cdf; border-color: #2d9cdf;color: #ffffff;font-size: .1rem;border-radius: 15px;"
+                        @click="changeCard">切換卡片</button>
+                </div>
+            </div>
+
+            <div class="card p-2 m-2" style="border-color: #ffa8c4;"
+                v-for="(trans, index) in viewTransDetail(cardsIndex)">
+                <div class="d-flex flex-row " :style="cardsStyle" @click="confirmPrize(index)">
+                    <div class="d-flex justify-content-center align-items-center mx-3">
+                        <img v-show="trans.pic == 100" src="./img/mom520_thanks.png" width="50" alt="">
+                        <img v-show="trans.pic == 1000" src="./img/mom520_lucky.png" width="50" alt="">
+                        <img v-show="trans.pic == 100000" src="./img/mom520_superlucky.png" width="50" alt="">
+                    </div>
+                    <div class="d-flex flex-fill justify-content-start align-items-center">
+                        <div class="d-flex flex-column flex-fill justify-content-center flex-fill">
                             <span class="fs-6 fw-bold">{{trans.MName}}</span>
-                            <p class="card-text"><small class="text-muted">{{trans.TransDateTime}}</small>
-                                <span v-show="trans.isGetPrize=='Y'" class="watermark prizeMark shadow">已領取</span>
+                            <p class="card-text"><small>{{trans.TransDateTime}}</small>
+                                <span v-show="trans.isGetPrize=='Y'" class="watermark prizeMark">已領取</span>
                             </p>
                         </div>
-                        <div class="col-4 text-end">
-                            <small class="text-muted">$ {{trans.Amount}}</small>
-                            <p class="card-text text-primary">{{trans.AIR}}</p>
+                    </div>
+                    <div class="d-flex text-end justify-content-end align-items-center">
+                        <div class="d-flex flex-column">
+                            <span>${{trans.Amount}}</span>
+                            <p class="card-text">
+                                <small style="font-size: .1rem;">授權碼 {{trans.AIR}}</small>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3 mb-5">
-            <div class="col-12 text-center">
-                <small class="text-muted">{{viewBottomWord(cardsIndex)}}</small>
+
+            <div class="d-flex flex-fill mt-3">
+                <div class="col-12 text-center">
+                    <small class="text-muted">{{viewBottomWord(cardsIndex)}}</small>
+                </div>
+            </div>
+            <div class="d-flex flex-fill mt-5">
             </div>
         </div>
-
 
         <div class="modal fade" id="actDetail">
             <div class="modal-dialog modal-dialog-centered">
@@ -441,12 +409,4 @@
                 })
         }
     }).mount('#app')
-
-    var anim = lottie.loadAnimation({
-        container: document.getElementById('lottie'),
-        renderer: 'svg',
-        loop: false,
-        autoplay: true,
-        animationData: animationData,
-    });
 </script>
