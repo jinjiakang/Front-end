@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        import { createApp, reactive } from 'https://unpkg.com/petite-vue?module'
+
+        const store = reactive({
+            count: 0,
+            inc() {
+                this.count++
+            }
+        })
+
+        // manipulate it here
+        store.inc()
+
+        createApp({
+            // share it with app scopes
+            store
+        }).mount()
+    </script>
+
+    <div v-scope="{ localCount: 0 }">
+        <p>Global {{ store.count }}</p>
+        <button @click="store.inc">increment</button>
+
+        <p>Local {{ localCount }}</p>
+        <button @click="localCount++">increment</button>
+    </div>
+
+
+</body>
+
+</html>

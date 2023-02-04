@@ -1,0 +1,364 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+* {
+    margin: 0;
+    margin: 0;
+}
+
+.app {
+    background-image: url(../images/esunwallet/applink/bg.jpg);
+    background-repeat: no-repeat;
+    min-width: 320px;
+    max-width: 950px;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav {
+    width: auto;
+    background-color: #f2f2f2;
+}
+
+ul {
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+.navTitle {
+    padding: 23px 45px;
+}
+
+ul>li {
+    list-style: none;
+    float: left;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.title-sm {
+    font-size: 9px;
+    margin: 5px;
+    font-weight: bold;
+    vertical-align: bottom;
+}
+
+.logo i {
+    background: url(../images/esunwallet/applink/logo_esun.png) no-repeat;
+    height: 54px;
+    width: 245px;
+    background-size: 100%;
+    display: block;
+}
+
+.block1 {
+    background: url(../images/esunwallet/applink/logo_wallet.png) no-repeat;
+    height: 102px;
+    width: 605px;
+    background-size: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.div2>.div2Font {
+    font-weight: bold;
+    letter-spacing: 20px;
+    margin-left: 35px;
+    margin-right: 15px;
+    font-size: 28pt;
+    font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+    color: #4273D6;
+    display: inline-block;
+}
+
+.triangle {
+    background: url(../images/esunwallet/applink/triangle.png) no-repeat;
+    height: 15px;
+    width: 15px;
+    background-size: 100%;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.div1, .div2, .div3, .div4, .div5 {
+    text-align: center;
+    width: auto;
+}
+
+.div1 {
+    margin-top: 135px;
+    margin-bottom: 65px;
+}
+
+.div3 {
+    margin-top: 44px;
+}
+
+.div4 {
+    margin-top: 142px;
+}
+
+.div5 {
+    margin-top: 150px;
+}
+
+.div6 {
+    margin: 28px 130px 0px 130px;
+    height: 250px;
+}
+
+.div3>.left, .div3>.right {
+    display: inline-block;
+    width: 300px;
+    height: 100px;
+    background-size: 100%;
+}
+
+.right {
+    background: url(../images/esunwallet/applink/google_play.png) no-repeat;
+    margin-left: 30px;
+}
+
+.right:active {
+    animation-name: jump;
+    animation-duration: 1s;
+}
+
+.left {
+    background: url(../images/esunwallet/applink/app_store.png) no-repeat;
+    margin-right: 30px;
+}
+
+.left:active {
+    animation-name: jump;
+    animation-duration: 1s;
+}
+
+@keyframes jump {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.05);
+    }
+    60% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.wallet {
+    background: url(../images/esunwallet/applink/phone_2210.png) no-repeat;
+    width: 560px;
+    height: 1080px;
+    background-size: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.div5>span {
+    font-weight: bold;
+    letter-spacing: .5ex;
+    font-size: 28pt;
+    color: #585555;
+}
+
+.div6>span {
+    letter-spacing: .1ex;
+    line-height: 30px;
+    font-size: 14pt;
+    color: #585555;
+}
+
+@media(max-width: 768px) {
+    .app {
+        background-size: 100%;
+    }
+    .navTitle {
+        padding: 18px 40px;
+    }
+    .logo i {
+        height: 42px;
+        width: 200px;
+    }
+    .div1 {
+        margin-top: 110px;
+        margin-bottom: 52px;
+    }
+    .block1 {
+        height: 81px;
+        width: 474px;
+    }
+    .div2>.div2Font {
+        font-size: 22pt;
+    }
+    .triangle {
+        height: 12px;
+        width: 12px;
+        margin-bottom: 3px;
+    }
+    .div3 {
+        margin-top: 36px;
+    }
+    .div3>.left, .div3>.right {
+        width: 220px;
+        height: 70px;
+    }
+    .div4 {
+        margin-top: 114px;
+    }
+    .wallet {
+        width: 390px;
+        height: 753px;
+    }
+    .div5 {
+        margin-top: 120px;
+    }
+    .div5>span {
+        font-size: 19pt;
+    }
+    .div6 {
+        margin: 23px 90px 0px 90px;
+    }
+    .div6>span {
+        font-size: 12pt;
+        line-height: 28px;
+    }
+}
+
+@media(max-width: 540px) {
+    .app {
+        background-size: 100%;
+    }
+    .navTitle {
+        padding: 14px 23px;
+    }
+    .logo i {
+        height: 30px;
+        width: 145px;
+    }
+    .div1 {
+        margin-top: 77px;
+        margin-bottom: 30px;
+    }
+    .block1 {
+        height: 57px;
+        width: 330px;
+    }
+    .div2>.div2Font {
+        font-size: 15pt;
+        letter-spacing: 15px;
+        margin-left: 20px;
+        margin-right: 5px;
+    }
+    .triangle {
+        height: 8px;
+        width: 8px;
+        margin-bottom: 3px;
+    }
+    .div3 {
+        margin-top: 25px;
+    }
+    .div3>.left, .div3>.right {
+        width: 150px;
+        height: 49px;
+    }
+    .left {
+        margin-right: 20px;
+    }
+    .right {
+        margin-left: 20px;
+    }
+    .div4 {
+        margin-top: 81px;
+    }
+    .wallet {
+        width: 298px;
+        height: 576px;
+    }
+    .div5 {
+        margin-top: 86px;
+    }
+    .div5>span {
+        font-size: 15pt;
+    }
+    .div6 {
+        margin: 16px 50px 0px 50px;
+    }
+    .div6>span {
+        font-size: 10pt;
+        line-height: 26px;
+    }
+}
+
+@media(max-width: 345px) {
+    .app {
+        background-size: 100%;
+    }
+    .navTitle {
+        padding: 7px 20px;
+    }
+    .logo i {
+        height: 23px;
+        width: 105px;
+    }
+    .div1 {
+        margin-top: 50px;
+        margin-bottom: 25px;
+    }
+    .block1 {
+        height: 35px;
+        width: 200px;
+    }
+    .div2>.div2Font {
+        font-size: 15pt;
+        letter-spacing: 15px;
+        margin-left: 20px;
+        margin-right: 5px;
+    }
+    .triangle {
+        height: 8px;
+        width: 8px;
+        margin-bottom: 3px;
+    }
+    .div3 {
+        margin-top: 16.5px;
+    }
+    .div3>.left, .div3>.right {
+        width: 100px;
+        height: 34px;
+    }
+    .left {
+        margin-right: 10px;
+    }
+    .right {
+        margin-left: 10px;
+    }
+    .div4 {
+        margin-top: 53px;
+    }
+    .wallet {
+        width: 205px;
+        height: 397px;
+    }
+    .div5 {
+        margin-top: 56px;
+    }
+    .div5>span {
+        font-size: 14pt;
+    }
+    .div6 {
+        margin: 12px 30px 0px 30px;
+    }
+    .div6>span {
+        line-height: 20px;
+    }
+}
